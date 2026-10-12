@@ -1,6 +1,21 @@
+import { useState } from 'react';
+import Autoplay from 'embla-carousel-autoplay';
 import { ArrowUpRight, CalendarDays, Clock3, MapPin, Music2, Sparkles } from 'lucide-react';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import pgtBanner from '../../client/public/piw_banner.jpeg';
 import pgtVideo from '../../client/public/pgt_mg.mp4';
+import djSarah from '../../client/public/images/pgt-2026/dj_sarah.jpeg';
+import iyani from '../../client/public/images/pgt-2026/iyani.jpeg';
+import nubia from '../../client/public/images/pgt-2026/nubia.jpeg';
+import jMelody from '../../client/public/images/pgt-2026/j_melody.jpeg';
+
+const pgtSlides = [
+  { src: pgtBanner, alt: 'Pwani Gat Talent, October 31, 2026, at Gymkhana Mombasa' },
+  { src: djSarah, alt: 'DJ Sarah at Pwani Gat Talent 2026' },
+  { src: iyani, alt: 'Iyani at Pwani Gat Talent 2026' },
+  { src: nubia, alt: 'Nubia at Pwani Gat Talent 2026' },
+  { src: jMelody, alt: 'J Melody at Pwani Gat Talent 2026' },
+];
 
 const performanceTypes = [
   'Music',
@@ -15,7 +30,10 @@ const performanceTypes = [
   'Emerging talent',
 ];
 
-const PwaniGotTalent = () => (
+const PwaniGotTalent = () => {
+  const [autoplay] = useState(() => Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true, stopOnFocusIn: true }));
+
+  return (
   <main className="min-h-screen bg-[#180b09] pt-24 text-white">
     <section className="relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_12%_35%,rgba(249,115,22,0.2),transparent_38%),radial-gradient(ellipse_at_90%_8%,rgba(250,204,21,0.12),transparent_30%)]" />
@@ -66,6 +84,19 @@ const PwaniGotTalent = () => (
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
         <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-amber-300">Feel the energy</p>
         <h2 className="max-w-2xl text-3xl font-black sm:text-4xl">A taste of Pwani Gat Talent.</h2>
+        <Carousel opts={{ loop: true }} plugins={[autoplay]} aria-label="Pwani Gat Talent event and artists" className="mx-auto mt-8 w-full max-w-md min-w-0">
+          <CarouselContent>
+            {pgtSlides.map((slide, index) => (
+              <CarouselItem key={slide.src} aria-label={`${index + 1} of ${pgtSlides.length}`}>
+                <img src={slide.src} alt={slide.alt} loading="lazy" decoding="async" className="aspect-[2/3] w-full rounded-lg object-contain object-center" />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <div className="mt-4 flex items-center justify-center gap-4">
+            <CarouselPrevious title="Previous image" className="static h-10 w-10 translate-y-0 border-white/30 bg-[#210d0a] text-white hover:bg-[#F97316] hover:text-white" />
+            <CarouselNext title="Next image" className="static h-10 w-10 translate-y-0 border-white/30 bg-[#210d0a] text-white hover:bg-[#F97316] hover:text-white" />
+          </div>
+        </Carousel>
         <video
           className="mt-8 aspect-video w-full rounded-xl bg-[#3d170d] object-contain shadow-[0_24px_64px_rgba(0,0,0,0.4)]"
           autoPlay
@@ -94,6 +125,7 @@ const PwaniGotTalent = () => (
       </div>
     </section>
   </main>
-);
+  );
+};
 
 export default PwaniGotTalent;

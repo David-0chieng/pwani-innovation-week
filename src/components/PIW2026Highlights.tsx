@@ -1,9 +1,23 @@
 import { useState } from 'react';
+import Autoplay from 'embla-carousel-autoplay';
 import { ArrowRight, CalendarDays, Clock3, MapPin, Radio, Users, Handshake, TrendingUp, Music } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useScrollReveal, fadeUp, fadeLeft, fadeRight, scaleIn } from '@/hooks/useScrollReveal';
 import { SURVEY_LINKS } from '@/lib/config';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import pgtBanner from '../../client/public/piw_banner.jpeg';
+import djSarah from '../../client/public/images/pgt-2026/dj_sarah.jpeg';
+import iyani from '../../client/public/images/pgt-2026/iyani.jpeg';
+import nubia from '../../client/public/images/pgt-2026/nubia.jpeg';
+import jMelody from '../../client/public/images/pgt-2026/j_melody.jpeg';
+
+const pgtSlides = [
+  { src: pgtBanner, alt: 'Pwani Gat Talent, October 31, 2026, at Gymkhana Mombasa' },
+  { src: djSarah, alt: 'DJ Sarah at Pwani Gat Talent 2026' },
+  { src: iyani, alt: 'Iyani at Pwani Gat Talent 2026' },
+  { src: nubia, alt: 'Nubia at Pwani Gat Talent 2026' },
+  { src: jMelody, alt: 'J Melody at Pwani Gat Talent 2026' },
+];
 
 const programmeDays = [
   {
@@ -46,6 +60,7 @@ const programmeDays = [
 
 const PIW2026Highlights = () => {
   const [selectedDay, setSelectedDay] = useState(0);
+  const [autoplay] = useState(() => Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true, stopOnFocusIn: true }));
   const video    = useScrollReveal();
   const whatHead = useScrollReveal();
   const whatCards= useScrollReveal();
@@ -229,16 +244,26 @@ const PIW2026Highlights = () => {
 
       {/* ── PWANI GAT TALENT ─────────────────────────────── */}
       <section ref={concert.ref} className="mx-4 mb-16 sm:mx-6 lg:mx-8">
-        <Link
-          to="/pwani-got-talent"
-          aria-label="Explore Pwani Gat Talent event details"
+        <div
           style={fadeUp(concert.inView)}
           className="group mx-auto grid max-w-7xl overflow-hidden rounded-2xl bg-[#210d0a] text-left shadow-[0_20px_45px_rgba(2,8,23,0.2)] transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_26px_55px_rgba(2,8,23,0.28)] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-[#F97316] md:grid-cols-[0.82fr_1.18fr]"
         >
-          <div className="relative min-h-[28rem] overflow-hidden bg-[#41150b] p-4 sm:p-7 md:min-h-[38rem]">
-            <img src={pgtBanner} alt="Pwani Gat Talent, October 31, 2026, at Gymkhana Mombasa" loading="lazy" decoding="async" className="h-full max-h-[44rem] w-full rounded-lg object-contain object-center transition-transform duration-700 group-hover:scale-[1.02]" />
+          <div className="flex min-w-0 items-center overflow-hidden bg-[#41150b] p-4 sm:p-7">
+            <Carousel opts={{ loop: true }} plugins={[autoplay]} aria-label="Pwani Gat Talent event and artists" className="w-full min-w-0">
+              <CarouselContent>
+                {pgtSlides.map((slide, index) => (
+                  <CarouselItem key={slide.src} aria-label={`${index + 1} of ${pgtSlides.length}`}>
+                    <img src={slide.src} alt={slide.alt} loading="lazy" decoding="async" className="aspect-[2/3] w-full rounded-lg object-contain object-center" />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="mt-4 flex items-center justify-center gap-4">
+                <CarouselPrevious title="Previous image" className="static h-10 w-10 translate-y-0 border-white/30 bg-[#210d0a] text-white hover:bg-[#F97316] hover:text-white" />
+                <CarouselNext title="Next image" className="static h-10 w-10 translate-y-0 border-white/30 bg-[#210d0a] text-white hover:bg-[#F97316] hover:text-white" />
+              </div>
+            </Carousel>
           </div>
-          <div className="flex flex-col justify-center bg-[radial-gradient(ellipse_at_top_right,rgba(249,115,22,0.2),transparent_42%),linear-gradient(145deg,#32110b,#160b0b)] px-6 py-9 text-white sm:px-10 sm:py-12 lg:px-14">
+          <Link to="/pwani-got-talent" aria-label="Explore Pwani Gat Talent event details" className="flex flex-col justify-center bg-[radial-gradient(ellipse_at_top_right,rgba(249,115,22,0.2),transparent_42%),linear-gradient(145deg,#32110b,#160b0b)] px-6 py-9 text-white focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-[-4px] focus-visible:outline-[#F97316] sm:px-10 sm:py-12 lg:px-14">
             <p className="mb-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-[#FDBA74]">
               <Music className="h-4 w-4" aria-hidden="true" /> The Coast takes the stage
             </p>
@@ -255,8 +280,8 @@ const PIW2026Highlights = () => {
                 Explore the event <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
               </span>
             </div>
-          </div>
-        </Link>
+          </Link>
+        </div>
       </section>
 
     </div>

@@ -235,7 +235,7 @@ const Navbar = () => {
                   onClick={close}
                   className="block w-full text-center bg-[#F97316] hover:bg-[#EA580C] text-white font-bold py-3.5 rounded-lg transition-colors duration-200"
                 >
-                  Register for PIW 2026
+                  Buy tickets
                 </Link>
               </div>
             </div>
