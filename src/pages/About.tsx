@@ -85,7 +85,7 @@ const About = () => {
             to="/tickets"
             className="inline-flex items-center gap-2 bg-white text-[#F97316] font-bold text-sm px-5 py-2.5 rounded-lg hover:bg-orange-50 transition-colors duration-200 flex-shrink-0"
           >
-            Register Interest <ArrowRight size={16} />
+            Buy tickets <ArrowRight size={16} />
           </Link>
         </div>
       </div>
@@ -196,7 +196,7 @@ const About = () => {
             to="/tickets"
             className="inline-flex items-center gap-2 bg-[#F97316] hover:bg-[#EA580C] text-white font-bold px-7 py-3.5 rounded-lg transition-all duration-200 hover:shadow-xl hover:shadow-[#F97316]/25"
           >
-            Register Interest <ArrowRight size={16} />
+            Buy tickets <ArrowRight size={16} />
           </Link>
         </div>
       </section>

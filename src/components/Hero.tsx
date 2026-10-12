@@ -216,7 +216,7 @@ const Hero = () => {
                     to="/tickets"
                     className="hero-pulse hero-shine group relative inline-flex items-center gap-2 overflow-hidden bg-[#F97316] hover:bg-[#EA580C] text-white px-6 py-3 text-sm font-bold rounded-lg transition-colors duration-200"
                   >
-                    Register Interest <ArrowRight size={16} className="hero-nudge" />
+                    Buy tickets <ArrowRight size={16} className="hero-nudge" />
                   </Link>
                   <Link
                     to="/about"
